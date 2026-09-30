@@ -1,56 +1,158 @@
-# Welcome to your Expo app 👋
+# SIAB
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> Aplicativo acadêmico para aprendizado e aplicação prática dos conceitos de
+> Programação para Dispositivos Móveis (PDM).
 
-## Get started
+O **SIAB** é um aplicativo mobile de gerenciamento de biblioteca desenvolvido
+com Expo e React Native. O projeto foi criado para evoluir ao longo das aulas
+de **PDM — Programação para Dispositivos Móveis**, transformando os conteúdos
+estudados em uma aplicação organizada, multiplataforma e próxima de um cenário
+real.
 
-1. Install dependencies
+O sistema tem finalidade exclusivamente educacional: não possui fins
+comerciais e não pretende substituir plataformas profissionais de gestão de
+bibliotecas.
 
-   ```bash
-   npm install
-   ```
+## Sobre o projeto
 
-2. Start the app
+A proposta do SIAB é centralizar, de forma simples, experiências comuns a um
+sistema de biblioteca — como autenticação, consulta do acervo, empréstimos e
+gestão de usuários — enquanto serve como laboratório para praticar conceitos
+de desenvolvimento mobile.
 
-   ```bash
-   npx expo start
-   ```
+O projeto está em desenvolvimento contínuo. No estado atual, possui:
 
-In the output, you'll find options to open the app in a
+- interface de login responsiva;
+- validação de e-mail e PIN;
+- autenticação simulada com dados locais;
+- feedback visual de carregamento e mensagens de erro;
+- navegação baseada em arquivos com Expo Router;
+- organização inicial em camadas inspirada em MVVM.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Objetivos de aprendizagem
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- desenvolver interfaces mobile com componentes nativos;
+- trabalhar navegação e fluxo entre telas;
+- gerenciar estado e regras de apresentação com hooks;
+- separar interface, lógica de negócio e acesso a dados;
+- aplicar tipagem estática com TypeScript;
+- exercitar boas práticas de organização, manutenção e evolução de software;
+- preparar uma base compatível com Android, iOS e web.
 
-## Get a fresh project
+## Tecnologias
 
-When you're ready, run:
+- [Expo SDK 57](https://docs.expo.dev/versions/v57.0.0/)
+- [React Native 0.86](https://reactnative.dev/)
+- [React 19](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Expo Router](https://docs.expo.dev/router/introduction/) para rotas e navegação
+- [Expo Vector Icons](https://docs.expo.dev/guides/icons/) para os ícones da interface
 
-```bash
-npm run reset-project
+## Arquitetura e organização
+
+A aplicação adota uma separação inspirada no padrão **MVVM
+(Model–View–ViewModel)**:
+
+```text
+src/
+├── app/                    # Rotas e layouts do Expo Router
+├── model/
+│   ├── entities/           # Entidades e tipos do domínio
+│   ├── repositories/       # Fontes de dados
+│   └── services/           # Regras de negócio
+├── view/
+│   └── screens/            # Componentes visuais das telas
+└── viewmodel/              # Estado e ações consumidos pelas views
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+As rotas ficam exclusivamente em `src/app`. As telas delegam estado e ações às
+ViewModels, enquanto serviços e repositórios concentram regras de negócio e
+acesso a dados.
 
-### Other setup steps
+## Pré-requisitos
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Antes de executar o projeto, instale:
 
-## Learn more
+- [Node.js](https://nodejs.org/) 22.13 ou superior;
+- npm, distribuído com o Node.js;
+- [Expo Go](https://expo.dev/go) em um dispositivo compatível ou um ambiente de
+  execução para Android, iOS ou web.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Como executar
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Clone o repositório e entre na pasta do projeto:
 
-## Join the community
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd siab
+```
 
-Join our community of developers creating universal apps.
+Instale as dependências:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+npx expo start
+```
+
+No terminal do Expo, escolha a plataforma desejada ou leia o QR Code com um
+dispositivo compatível. Também é possível iniciar diretamente cada destino:
+
+```bash
+npm run android
+npm run ios
+npm run web
+```
+
+> A execução do simulador iOS requer macOS. Em outros sistemas operacionais,
+> utilize um dispositivo físico, Android ou a versão web.
+
+## Comandos úteis
+
+| Comando | Descrição |
+| --- | --- |
+| `npm start` | Inicia o servidor de desenvolvimento do Expo |
+| `npm run android` | Abre o projeto no Android |
+| `npm run ios` | Abre o projeto no simulador iOS |
+| `npm run web` | Abre a aplicação no navegador |
+| `npm run lint` | Executa a análise estática do código |
+| `npx tsc --noEmit` | Verifica os tipos sem gerar arquivos |
+| `npx expo-doctor` | Diagnostica configuração e dependências do projeto |
+
+Para adicionar pacotes do ecossistema Expo, utilize `npx expo install
+<pacote>`. Esse comando seleciona uma versão compatível com o SDK usado pelo
+projeto.
+
+## Estado atual e próximos passos
+
+O SIAB ainda está em uma fase inicial. A autenticação utiliza um repositório em
+memória e um atraso artificial para simular uma operação assíncrona; portanto,
+ela não deve ser tratada como um mecanismo de segurança real.
+
+Possíveis evoluções do projeto incluem:
+
+- implementação da tela inicial;
+- catálogo e pesquisa de livros;
+- detalhes e disponibilidade de exemplares;
+- fluxo de empréstimos, devoluções e reservas;
+- histórico do usuário;
+- persistência local e integração com uma API;
+- testes automatizados e melhorias de acessibilidade.
+
+Esses itens representam a direção pretendida para o aprendizado e podem mudar
+conforme o projeto evoluir.
+
+## Aviso
+
+Este projeto é uma iniciativa acadêmica, sem vínculo oficial com bibliotecas,
+instituições ou sistemas comerciais. Dados, usuários e fluxos presentes na
+aplicação podem ser fictícios e utilizados apenas para demonstração.
+
+## Licença
+
+Consulte o arquivo [LICENSE](./LICENSE) para conhecer os termos aplicáveis ao
+repositório.

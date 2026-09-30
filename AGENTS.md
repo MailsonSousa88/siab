@@ -1,41 +1,81 @@
-This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
+Este é um aplicativo móvel desenvolvido com Expo e React Native. Priorize
+padrões voltados a dispositivos móveis, desempenho e compatibilidade entre
+plataformas.
 
-## Expo has changed — do not trust your training data
+## Idioma da documentação
 
-Expo ships breaking changes every SDK release. APIs you remember are likely renamed, moved, or removed. Before writing any code that touches an Expo, EAS, or React Native API:
+- Toda a documentação deste projeto deve ser escrita e mantida em português
+  brasileiro (`pt-BR`).
+- Essa regra inclui arquivos Markdown da raiz, documentos em `docs/`, registros
+  de decisões arquiteturais, guias e instruções para desenvolvimento.
+- Comandos, APIs, nomes de bibliotecas e identificadores de código devem manter
+  sua grafia técnica original quando necessário.
+- Textos exibidos pela aplicação ao usuário também devem utilizar `pt-BR`.
 
-1. Read the major version of the `expo` package in `package.json`.
-2. Fetch the matching versioned docs: `https://docs.expo.dev/versions/v<major>.0.0/`
-3. For anything else, fetch https://docs.expo.dev/llms.txt — an index of all Expo docs with corrections to common LLM misconceptions. Follow its links to the specific page you need; never answer from memory.
+## O Expo muda constantemente — não confie nos dados de treinamento
 
-## Commands
+O Expo pode introduzir mudanças incompatíveis a cada versão do SDK. APIs
+lembradas pelo modelo podem ter sido renomeadas, movidas ou removidas. Antes de
+escrever qualquer código que utilize uma API do Expo, EAS ou React Native:
 
-Use `bunx` instead of `npx` if the project uses bun (`bun.lock` present).
+1. leia a versão principal do pacote `expo` em `package.json`;
+2. consulte a documentação correspondente em
+   `https://docs.expo.dev/versions/v<versão-principal>.0.0/`;
+3. para qualquer outro assunto, consulte `https://docs.expo.dev/llms.txt`, que
+   indexa a documentação e corrige equívocos comuns de modelos de linguagem.
+   Siga os links para a página específica necessária e não responda apenas com
+   base na memória.
+
+## Comandos
+
+Use `bunx` no lugar de `npx` se o projeto utilizar Bun, identificado pela
+presença do arquivo `bun.lock`.
 
 ```bash
-npx expo install <package>  # ALWAYS use instead of npm/yarn/pnpm/bun add — resolves SDK-compatible versions
-npx expo start              # start the dev server
-npx expo lint               # lint
-npx tsc --noEmit            # typecheck
-npx expo-doctor             # diagnose dependency and config issues
-npx expo install --fix      # fix incompatible package versions
+npx expo install <pacote>  # Instala uma versão compatível com o SDK do Expo
+npx expo start             # Inicia o servidor de desenvolvimento
+npx expo lint              # Executa a análise estática
+npx tsc --noEmit           # Verifica os tipos sem gerar arquivos
+npx expo-doctor            # Diagnostica dependências e configurações
+npx expo install --fix     # Corrige versões incompatíveis dos pacotes
 ```
 
-Run lint and typecheck before declaring any task done.
+Execute a análise estática e a verificação de tipos antes de declarar qualquer
+tarefa concluída.
 
-## Navigation & Routing
+## Navegação e rotas
 
-- Use **Expo Router** for all navigation. Routes live in `src/app/` — every file there is a screen, `_layout.tsx` files define navigators. Keep non-route code (components, hooks, utils) outside `src/app/`.
-- Import `Link`, `router`, and `useLocalSearchParams` from `expo-router`.
-- Docs: https://docs.expo.dev/router/introduction.md
+- Use o **Expo Router** para toda a navegação.
+- As rotas ficam em `src/app/`; cada arquivo comum desse diretório representa
+  uma rota, e arquivos `_layout.tsx` definem navegadores.
+- Mantenha componentes, Hooks e utilitários que não sejam rotas fora de
+  `src/app/`.
+- Importe `Link`, `router` e `useLocalSearchParams` de `expo-router`.
+- Consulte `https://docs.expo.dev/router/introduction.md`.
 
-## Building with EAS
+## Compilações com EAS
 
-Use EAS to build, sign, and submit the app in the cloud (`eas build`, `eas submit`) and to ship over-the-air updates (`eas update`) — no local Xcode or Android Studio required. Run EAS CLI as `bunx eas-cli <command>` in Bun projects, or `npx eas-cli@latest <command>` otherwise; substitute that for bare `eas` in docs examples.
-Docs: https://docs.expo.dev/eas/index.md
+Use o EAS para compilar, assinar e enviar o aplicativo pela nuvem (`eas build` e
+`eas submit`) e para distribuir atualizações remotas (`eas update`). Não é
+necessário manter projetos locais no Xcode ou Android Studio para essas tarefas.
 
-## Rules
+Em projetos com Bun, execute `bunx eas-cli <comando>`. Nos demais, execute
+`npx eas-cli@latest <comando>`. Use essas formas no lugar do comando global
+`eas` mostrado em exemplos da documentação.
 
-- If `ios/` and `android/` directories do not exist, they are generated (Continuous Native Generation). Never create or edit them by hand — configure native behavior in `app.json` and config plugins.
-- Expo Go only includes its bundled native modules. After adding a library with native code, the app needs a development build: `npx expo run:ios|android` locally, or `eas build --profile development`.
-- Prefer recommended Expo modules over third-party libraries, and check your available skills before adding dependencies. Docs: https://docs.expo.dev/versions/latest/index.md
+Consulte `https://docs.expo.dev/eas/index.md`.
+
+## Regras
+
+- Se os diretórios `ios/` e `android/` não existirem, eles são gerados pela
+  Geração Nativa Contínua. Nunca os crie ou edite manualmente; configure o
+  comportamento nativo em `app.json` e por meio de plugins de configuração.
+- O Expo Go inclui apenas os módulos nativos distribuídos com ele. Depois de
+  adicionar uma biblioteca com código nativo, gere uma compilação de
+  desenvolvimento com `npx expo run:ios`, `npx expo run:android` ou
+  `eas build --profile development`.
+- Dê preferência aos módulos recomendados pelo Expo em vez de bibliotecas de
+  terceiros e verifique as habilidades disponíveis antes de adicionar
+  dependências.
+- Consulte `https://docs.expo.dev/versions/latest/index.md` para conhecer os
+  módulos recomendados.
